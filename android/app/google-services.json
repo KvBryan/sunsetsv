@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "541915377280",
+    "project_id": "sunsetsv-fe0fd",
+    "storage_bucket": "sunsetsv-fe0fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:541915377280:android:ce8f1f6d43e986eb688065",
+        "android_client_info": {
+          "package_name": "com.sunsetsv.ocean"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8TMRMJeTwgtXSBkO4oXjfZCpiz_HVsMs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
