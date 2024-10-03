@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'edit_profile_model.dart';
@@ -32,6 +33,13 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => EditProfileModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await currentUserReference!.update(createUsersRecordData(
+        photoUrl: currentUserPhoto,
+      ));
+    });
 
     _model.textController1 ??=
         TextEditingController(text: widget!.userProfile?.displayName);
@@ -129,16 +137,18 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                       ),
                       child: Padding(
                         padding: EdgeInsets.all(2.0),
-                        child: Container(
-                          width: 90.0,
-                          height: 90.0,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                          ),
-                          child: Image.network(
-                            widget!.userProfile!.photoUrl,
-                            fit: BoxFit.fitWidth,
+                        child: AuthUserStreamWidget(
+                          builder: (context) => Container(
+                            width: 90.0,
+                            height: 90.0,
+                            clipBehavior: Clip.antiAlias,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: Image.network(
+                              currentUserPhoto,
+                              fit: BoxFit.fitWidth,
+                            ),
                           ),
                         ),
                       ),

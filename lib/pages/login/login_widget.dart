@@ -50,9 +50,9 @@ class _LoginWidgetState extends State<LoginWidget> {
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).tertiary,
           image: DecorationImage(
-            fit: BoxFit.fitWidth,
+            fit: BoxFit.fitHeight,
             image: Image.asset(
-              'assets/images/createAccount_BG@3x.jpg',
+              'assets/images/_2a3f60f7-12dd-4271-be89-84e3206de8c3.jpg',
             ).image,
           ),
         ),
@@ -66,7 +66,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 width: double.infinity,
                 height: 450.0,
                 decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  color: FlutterFlowTheme.of(context).primaryBackground,
                   boxShadow: [
                     BoxShadow(
                       blurRadius: 7.0,
@@ -97,7 +97,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                               0.0, 56.0, 0.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               if (Theme.of(context).brightness ==

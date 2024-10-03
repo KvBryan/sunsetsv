@@ -200,9 +200,6 @@ class _ChangePhotoWidgetState extends State<ChangePhotoWidget>
                         await selectMediaWithSourceBottomSheet(
                       context: context,
                       allowPhoto: true,
-                      backgroundColor: FlutterFlowTheme.of(context).tertiary,
-                      textColor: FlutterFlowTheme.of(context).darkText,
-                      pickerFontFamily: 'Lexend Deca',
                     );
                     if (selectedMedia != null &&
                         selectedMedia.every((m) =>
@@ -212,11 +209,6 @@ class _ChangePhotoWidgetState extends State<ChangePhotoWidget>
 
                       var downloadUrls = <String>[];
                       try {
-                        showUploadMessage(
-                          context,
-                          'Uploading file...',
-                          showLoading: true,
-                        );
                         selectedUploadedFiles = selectedMedia
                             .map((m) => FFUploadedFile(
                                   name: m.storagePath.split('/').last,
@@ -237,7 +229,6 @@ class _ChangePhotoWidgetState extends State<ChangePhotoWidget>
                             .map((u) => u!)
                             .toList();
                       } finally {
-                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
                         _model.isDataUploading = false;
                       }
                       if (selectedUploadedFiles.length ==
@@ -248,10 +239,8 @@ class _ChangePhotoWidgetState extends State<ChangePhotoWidget>
                               selectedUploadedFiles.first;
                           _model.uploadedFileUrl = downloadUrls.first;
                         });
-                        showUploadMessage(context, 'Success!');
                       } else {
                         safeSetState(() {});
-                        showUploadMessage(context, 'Failed to upload data');
                         return;
                       }
                     }
@@ -288,6 +277,7 @@ class _ChangePhotoWidgetState extends State<ChangePhotoWidget>
                     await currentUserReference!.update(createUsersRecordData(
                       photoUrl: _model.uploadedFileUrl,
                     ));
+                    context.safePop();
                   },
                   text: FFLocalizations.of(context).getText(
                     '3xg4683p' /* Guardar Foto */,
