@@ -199,6 +199,9 @@ class _ChangePhotoWidgetState extends State<ChangePhotoWidget>
                     final selectedMedia =
                         await selectMediaWithSourceBottomSheet(
                       context: context,
+                      maxWidth: 1000.00,
+                      maxHeight: 1200.00,
+                      imageQuality: 100,
                       allowPhoto: true,
                     );
                     if (selectedMedia != null &&

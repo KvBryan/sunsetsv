@@ -115,77 +115,97 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                 child: Padding(
                   padding:
                       EdgeInsetsDirectional.fromSTEB(20.0, 40.0, 20.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Card(
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        color: Color(0xFF30B2A3),
-                        elevation: 0.0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(60.0),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(2.0),
-                          child: ClipRRect(
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      context.pushNamed(
+                        'editProfile',
+                        queryParameters: {
+                          'userProfile': serializeParam(
+                            columnUsersRecord,
+                            ParamType.Document,
+                          ),
+                        }.withoutNulls,
+                        extra: <String, dynamic>{
+                          'userProfile': columnUsersRecord,
+                        },
+                      );
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Card(
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          color: Color(0xFF30B2A3),
+                          elevation: 0.0,
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(60.0),
-                            child: Image.network(
-                              columnUsersRecord.photoUrl,
-                              width: 80.0,
-                              height: 80.0,
-                              fit: BoxFit.cover,
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(2.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(60.0),
+                              child: Image.network(
+                                columnUsersRecord.photoUrl,
+                                width: 80.0,
+                                height: 80.0,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              8.0, 0.0, 0.0, 0.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                valueOrDefault<String>(
-                                  columnUsersRecord.displayName,
-                                  'Mr. Rogers',
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .headlineSmall
-                                    .override(
-                                      fontFamily: 'Lexend Deca',
-                                      color: Colors.white,
-                                      fontSize: 20.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 4.0, 0.0, 0.0),
-                                child: Text(
-                                  columnUsersRecord.email,
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                8.0, 0.0, 0.0, 0.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  valueOrDefault<String>(
+                                    columnUsersRecord.displayName,
+                                    'Mr. Rogers',
+                                  ),
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
+                                      .headlineSmall
                                       .override(
                                         fontFamily: 'Lexend Deca',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        fontSize: 14.0,
+                                        color: Colors.white,
+                                        fontSize: 20.0,
                                         letterSpacing: 0.0,
-                                        fontWeight: FontWeight.normal,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                 ),
-                              ),
-                            ],
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 4.0, 0.0, 0.0),
+                                  child: Text(
+                                    columnUsersRecord.email,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Lexend Deca',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -559,8 +579,19 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                                   color: Color(0xFF95A1AC),
                                   size: 25.0,
                                 ),
-                                onPressed: () {
-                                  print('IconButton pressed ...');
+                                onPressed: () async {
+                                  context.pushNamed(
+                                    'editProfile',
+                                    queryParameters: {
+                                      'userProfile': serializeParam(
+                                        columnUsersRecord,
+                                        ParamType.Document,
+                                      ),
+                                    }.withoutNulls,
+                                    extra: <String, dynamic>{
+                                      'userProfile': columnUsersRecord,
+                                    },
+                                  );
                                 },
                               ),
                             ],
@@ -641,8 +672,8 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                                     color: Color(0xFF95A1AC),
                                     size: 25.0,
                                   ),
-                                  onPressed: () {
-                                    print('IconButton pressed ...');
+                                  onPressed: () async {
+                                    context.pushNamed('paymentInfo');
                                   },
                                 ),
                               ],
@@ -735,8 +766,19 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                                     color: Color(0xFF95A1AC),
                                     size: 25.0,
                                   ),
-                                  onPressed: () {
-                                    print('IconButton pressed ...');
+                                  onPressed: () async {
+                                    context.pushNamed(
+                                      'changePassword',
+                                      queryParameters: {
+                                        'userProfile': serializeParam(
+                                          columnUsersRecord,
+                                          ParamType.Document,
+                                        ),
+                                      }.withoutNulls,
+                                      extra: <String, dynamic>{
+                                        'userProfile': columnUsersRecord,
+                                      },
+                                    );
                                   },
                                 ),
                               ],
@@ -852,8 +894,8 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                                         color: Color(0xFF95A1AC),
                                         size: 25.0,
                                       ),
-                                      onPressed: () {
-                                        print('IconButton pressed ...');
+                                      onPressed: () async {
+                                        context.pushNamed('myProperties');
                                       },
                                     ),
                                   ],
@@ -940,8 +982,8 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                                       color: Color(0xFF95A1AC),
                                       size: 25.0,
                                     ),
-                                    onPressed: () {
-                                      print('IconButton pressed ...');
+                                    onPressed: () async {
+                                      context.pushNamed('myBookings');
                                     },
                                   ),
                                 ],
